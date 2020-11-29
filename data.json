@@ -1,0 +1,65 @@
+user=
+{
+	"id":"angel",
+	"pwd":"",
+	"post":
+	[
+		"nnrjgnkejngwlkrgwlnqlk",
+		"14jnnn5nnkn5987686n3yytb"
+	],
+	"following":[
+		"anncy",
+		"clement"
+	],
+	"followers":[
+		"anncy"
+	]
+}
+posts=
+[
+	{
+		"path":"./images/user12/133",
+		"caption":"keon #ok #hello",
+		"hashtags":[
+			"ok",
+			"hello"],
+		"noOfLikes":12,
+		"likes":[
+			"anncy",
+			"clement"
+		],
+		"noOfComments":3,
+		"comments":[
+			{
+				"user":"anncy",
+				"comment":"nice",
+				"likes":12,
+				"noOfReplies":2,
+				"replies":[
+					{
+						"user":"anncy",
+						"reply":"yes",
+						"likes":12
+					}]
+			}],
+		"noOfShare":12
+	}
+]
+
+
+
+
+
+
+
+
+login
+signup
+upload post
+delete post
+update post
+hastags
+feed
+friends
+request
+
