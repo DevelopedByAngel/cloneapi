@@ -53,13 +53,21 @@ posts=
 
 
 
-login
-signup
-upload post
-delete post
-update post
-hastags
-feed
-friends
-request
+login..
+signup ..
+upload post ..
+delete post ..
+hastags ..
+unfriend ..
+request ..
+accept request ..
+cancel request ..
+feed ..
+friendsList ..
+profile ..
+comment ..
+reply ..
+like ..
+share ..
+edit profile
 
