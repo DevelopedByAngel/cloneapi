@@ -75,6 +75,7 @@ app.post('/uploadDP', uploadDP.single('imgUploader'), (req, res, next) => {
 	 	{
 	 		console.log("updated")
 	 		getUser(res,req.headers.userID)
+
 	 	})
 	})
   // res.json({path: file.path})
@@ -86,8 +87,8 @@ var url="mongodb+srv://angel:angel@cluster0.xmcvr.mongodb.net/clone?retryWrites=
 client.connect(url,function(err,db)
 	{
 		var id="5fc37fdf0fa17805bc4bb60a"
-	 	var database = db.db('Clone').collection('login')
-	 	console.log(database)
+
+		console.log('database')
 	})
 
 
@@ -158,7 +159,26 @@ app.post('/updatepost',(req,res)=>
 			})
 	})
 })
-
+app.get('/search/:query',(req,res) =>
+{
+	const {query} = req.params
+	var users=[]
+	console.log(query)
+	client.connect(url,function(err,db)
+	{
+		var database= db.db('Clone').collection('users')
+		var r1=database.find({id: { $regex:'^'+query  } })
+			// console.log(r1)
+			r1.forEach((r)=>
+			{
+				users.push(r)				
+			},()=>
+			{
+				console.log(users)
+				res.json(users)
+			})
+	})
+})
 
 
 
@@ -478,6 +498,7 @@ const getUser =(res,id) =>
 				postList.push(c)
 			},()=>
 			{
+				console.log('sent')
 				res.json({"user":userData,"post":postList})
 			})
 		})
@@ -485,6 +506,7 @@ const getUser =(res,id) =>
 }
 app.post('/login',(req,res)=>
 {
+	console.log('login')
 	const {id,password} = req.body;
 	client.connect(url,function(err,db)
 	{
@@ -503,6 +525,7 @@ app.post('/login',(req,res)=>
 })
 app.post('/signup',(req,res)=>
 {
+	console.log('in')
 	const {id,email,password} = req.body;
 	const hash=jwt.sign({password:password},'spindle');
 	const newUser=
@@ -547,6 +570,7 @@ app.post('/signup',(req,res)=>
 					assert.equal(null,error);
 					console.log("Account created [Added to users]");
 					db.close();//mongodb process is asunchronous so next steps inside function
+					console.log('going')
 					getUser(res,id)
 				})
 			}
