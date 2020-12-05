@@ -195,11 +195,15 @@ app.post('/likeComment',(req,res)=>
 		var post = db.db('Clone').collection('post')
 		post.updateOne({"_id":objectId(postID),"comments._id":objectId(cmtID)},{$inc: {"comments.$.likes":1}},(error1,r1) =>
 		{
-			console.log(error1)
-			assert.equal(null,error1);
-			console.log("You liked this comment");
-			db.close();
-			res.json("done")
+			post.updateOne({"_id":objectId(postID),"comments._id":objectId(cmtID)},{$push: {like:userID}},(error2,r2) =>
+			{
+				console.log(error1)
+				assert.equal(null,error2);
+				console.log("You liked this comment");
+				db.close();
+				res.json("done")
+			})
+			
 		})
 	})	
 })
@@ -231,6 +235,7 @@ app.post('/comment',(req,res)=>
 		"user":userID,
 		"comment":cmt,
 		"likes":0,
+		"like":[],
 		"replies":[]
 	}
 	client.connect(url,function(err,db)
@@ -354,6 +359,7 @@ app.post('/Unfriend',(req,res)=>
 			{
 				assert.equal(null,error2)
 				console.log(userName+" Unfriended "+friendName);
+				res.json("Unfriended")
 				db.close();			
 			})
 		})
@@ -378,9 +384,34 @@ app.post('/acceptRequest',(req,res)=>
 					{
 						assert.equal(null,error4)
 						console.log(userName+" accepted "+requestName+"'s request");
+						res.json("accepted")
 						db.close();
 					})
 				})				
+			})
+		})
+	})
+})
+app.post('/cancelRequest', (req,res)=>
+{
+	console.log("in")
+	const {userID,userName,requestName} = req.body;
+	client.connect(url,function(err,db)
+	{
+		console.log("in")
+		var user = db.db('Clone').collection('users')
+		user.updateOne({"_id": objectId(userID)},{$pull:{pending:requestName}},(error1,r1)=>
+		{
+			console.log("in")
+			assert.equal(null,error1)
+			user.updateOne({"id": requestName},{$pull:{request:userName}},(error2,r2)=>
+			{
+				console.log("in")
+				assert.equal(null,error2)
+				console.log(userName+" canceled "+requestName+"'s request");
+				res.json("canceled")
+				db.close();
+								
 			})
 		})
 	})
@@ -479,6 +510,10 @@ const UploadPost=(res,userID,caption,path)=>
 		})
 	})
 }
+app.post('/getUser',(req,res)=>
+{
+	getUser(res,req.body.id)
+})
 const getUser =(res,id) =>
 {
 	console.log("logged");
@@ -519,6 +554,10 @@ app.post('/login',(req,res)=>
 			{
 				console.log("logged in");
 				getUser(res,id)
+			}
+			else
+			{
+				res.json({error:"Wrong credentials"})
 			}
 		})
 	})
