@@ -61,6 +61,7 @@ var storageDP=multer.diskStorage({
 var uploadDP=multer({storage:storageDP})
 app.post('/uploadDP', uploadDP.single('imgUploader'), (req, res, next) => {
   const file = req.file
+  console.log(req.file)
   if (!file) {
     const error = new Error('Please upload a file')
     error.httpStatusCode = 400
@@ -69,12 +70,13 @@ app.post('/uploadDP', uploadDP.single('imgUploader'), (req, res, next) => {
   const path = file.path
   client.connect(url,function(err,db)
 	{
-		var id="5fc37fdf0fa17805bc4bb60a"
+		// var id="5fc37fdf0fa17805bc4bb60a"
 	 	var database = db.db('Clone').collection('users')
 	 	database.updateOne({"_id":objectId(req.headers.id)},{$set:{path:path}},(error1,r1)=>
 	 	{
-	 		console.log("updated")
-	 		getUser(res,req.headers.userID)
+	 		console.log(r1)
+	 		console.log("updated",req.headers.userid)
+	 		getUser(res,req.headers.userid)
 
 	 	})
 	})
@@ -454,20 +456,18 @@ app.post('/deletePost',(req,res)=>
 		})
 	})
 })
-app.get('/hashtags',(req,res)=>
+
+app.get('/hashtags/:hashtag',(req,res)=>
 {
-	const {hashtag}=req.body;
+	const {hashtag}=req.params;
 	client.connect(url,function(err,db)
 	{
 		var found=[]
 		var database = db.db('Clone').collection('post')
-		var find=database.find()
+		var find=database.find({hashtags:"#"+hashtag})
 		find.forEach((f,error)=>
 		{
-			console.log("in")
-			console.log(error,f)
 			assert.equal(null,error)
-			if(f.hashtags.includes("#"+hashtag))
 				found.push(f)
 			if(found.length===10)
 				res.json(found.reverse())
