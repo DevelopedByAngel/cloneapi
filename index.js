@@ -88,6 +88,7 @@ var objectId=mongo.ObjectId;
 var url="mongodb+srv://angel:angel@cluster0.xmcvr.mongodb.net/clone?retryWrites=true&w=majority"
 client.connect(url,function(err,db)
 	{
+		var database = db.db('Clone').collection('login')
 		var id="5fc37fdf0fa17805bc4bb60a"
 
 		console.log('database')
