@@ -96,8 +96,11 @@ app.post("/share", (req, res) => {
 app.post("/like", (req, res) => {
 	Post.like(req, res);
 });
-app.post("/doubt", (req, res) => {
+app.get("/getdoubt", (req, res) => {
 	Product.doubt(req, res);
+});
+app.post("/doubt", (req, res) => {
+	Product.addDoubt(req, res);
 });
 app.post("/answer", (req, res) => {
 	Product.answerDoubt(req, res);
@@ -115,6 +118,9 @@ app.post("/product", (req, res) => {
 
 app.post("/editProduct", (req, res) => {
 	Product.editProduct(req, res);
+});
+app.post("/getBuyers", (req, res) => {
+	Product.getBuyers(req, res);
 });
 app.post("/review", (req, res) => {
 	Product.review(req, res);

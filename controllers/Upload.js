@@ -4,10 +4,11 @@ var objectId = mongo.ObjectId;
 var assert = require("assert");
 const multer = require("multer");
 const Post = require("./Post.js");
+const Product = require("./Product.js");
+const User = require("./User.js");
 const fs = require("fs");
 var url =
 	"mongodb+srv://angel:angel@cluster0.xmcvr.mongodb.net/clone?retryWrites=true&w=majority";
-const User = require("./User.js");
 var storage = multer.diskStorage({
 	destination: (req, file, callback) => {
 		if (fs.existsSync("./images/user/" + req.headers.id)) {
