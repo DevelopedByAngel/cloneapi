@@ -227,5 +227,8 @@ app.get("/hashtags/:hashtag", (req, res) => {
 		});
 	});
 });
+app.get("/test", (req, res) => {
+	res.json("okay");
+});
 
 app.listen(3000 || process.env.PORT);
