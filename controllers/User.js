@@ -5,11 +5,11 @@ var objectId = mongo.ObjectId;
 const jwt = require("jsonwebtoken");
 var url =
 	"mongodb+srv://angel:angel@cluster0.xmcvr.mongodb.net/clone?retryWrites=true&w=majority";
-const details = (req, res, uid) => {
-	const id = req.headers.id;
-	const address = req.headers.address;
-	const city = req.headers.city;
-	const mobile = req.headers.mobile;
+const details = (additionalData, res, uid) => {
+	const id = additionalData.id;
+	const address = additionalData.address;
+	const city = additionalData.city;
+	const mobile = additionalData.mobile;
 	client.connect(url, function (err, db) {
 		var user = db.db("Clone").collection("users");
 		user.updateOne(

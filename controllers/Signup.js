@@ -48,6 +48,8 @@ const signup = (req, res, client, url) => {
 						console.log("going");
 						User.getUser(res, id);
 					});
+				} else {
+					res.json({ error: "ID already exists" });
 				}
 			}
 		);

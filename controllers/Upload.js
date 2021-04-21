@@ -68,29 +68,33 @@ const post = (req, res, next) => {
 		return next(error);
 	}
 	console.log(file.path);
-	const sentData = JSON.parse(req.body.data);
-	console.log(sentData, sentData.caption);
-	Post.UploadPost(res, sentData.user, sentData.caption, file.path);
+	const additionalData = JSON.parse(req.body.data);
+	Post.UploadPost(
+		res,
+		additionalData.user,
+		additionalData.caption,
+		file.path
+	);
 };
 const postDP = (req, res, next) => {
 	const file = req.file;
-	console.log(req.file);
 	if (!file) {
 		const error = new Error("Please upload a file");
 		error.httpStatusCode = 400;
 		return next(error);
 	}
 	const path = file.path;
+	const additionalData = JSON.parse(req.body.data);
 	client.connect(url, function (err, db) {
 		// var id="5fc37fdf0fa17805bc4bb60a"
 		var database = db.db("Clone").collection("users");
 		database.updateOne(
-			{ _id: objectId(req.headers.id) },
+			{ _id: objectId(additionalData.id) },
 			{ $set: { path: path } },
 			(error1, r1) => {
 				console.log(r1);
-				console.log("updated", req.headers.userid);
-				User.details(req, res, req.headers.userid);
+				console.log("updated", additionalData.userid);
+				User.details(additionalData, res, additionalData.userid);
 			}
 		);
 	});
@@ -103,14 +107,15 @@ const postProduct = (req, res, next) => {
 		return next(error);
 	}
 	console.log(file.path + "ok");
+	const additionalData = JSON.parse(req.body.data);
 	Product.UploadProduct(
 		res,
-		req.headers.id,
-		req.headers.user,
-		req.headers.name,
-		req.headers.desc,
-		req.headers.price,
-		req.headers.qty,
+		additionalData.id,
+		additionalData.user,
+		additionalData.name,
+		additionalData.desc,
+		additionalData.price,
+		additionalData.qty,
 		file.path
 	);
 };
