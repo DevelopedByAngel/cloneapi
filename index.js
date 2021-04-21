@@ -145,6 +145,7 @@ app.post("/getUser", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
+	console.log("login", req.body);
 	Login.login(req, res, client, url);
 });
 app.post("/signup", (req, res) => {
