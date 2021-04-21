@@ -68,7 +68,9 @@ const post = (req, res, next) => {
 		return next(error);
 	}
 	console.log(file.path);
-	Post.UploadPost(res, req.headers.user, req.headers.caption, file.path);
+	const sentData = JSON.parse(req.body.data);
+	console.log(sentData, sentData.caption);
+	Post.UploadPost(res, sentData.user, sentData.caption, file.path);
 };
 const postDP = (req, res, next) => {
 	const file = req.file;

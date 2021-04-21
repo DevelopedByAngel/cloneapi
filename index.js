@@ -231,5 +231,4 @@ app.get("/hashtags/:hashtag", (req, res) => {
 app.get("/test", (req, res) => {
 	res.json("okay");
 });
-
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 5000);
