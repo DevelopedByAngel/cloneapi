@@ -19,7 +19,10 @@ const Upload = require("./controllers/Upload.js");
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(__dirname + "/"));
-
+app.use(function (req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	next();
+});
 app.post("/upload", Upload.upload.single("imgUploader"), (req, res, next) => {
 	Upload.post(req, res, next);
 });
