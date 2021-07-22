@@ -4,7 +4,9 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const fs = require("fs");
+var path = require('path');
 var mongo = require("mongodb");
+var mongoose = require('mongoose');
 var assert = require("assert");
 var client = mongo.MongoClient;
 var objectId = mongo.ObjectId;
@@ -55,14 +57,14 @@ app.post(
 app.post("/updatepost", (req, res) => {
 	Post.updatePost(req, res);
 });
-// client.connect(url, function (err, db) {
-// 	console.log(err);
-// 	console.log(db);
-// 	var database = db.db("Clone").collection("login");
-// 	var id = "5fc37fdf0fa17805bc4bb60a";
+client.connect(url, function (err, db) {
+	console.log(err);
+	console.log(db);
+	var database = db.db("Clone").collection("login");
+	var id = "5fc37fdf0fa17805bc4bb60a";
 
-// 	console.log("database");
-// });
+	console.log("database");
+});
 
 // const get = (name, res) => {
 // 	client.connect(url, function (err, db) {
