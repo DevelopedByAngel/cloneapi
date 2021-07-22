@@ -17,20 +17,20 @@ const Signup = require("./controllers/Signup.js");
 const Login = require("./controllers/Login.js");
 const Upload = require("./controllers/Upload.js");
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
 app.use(express.static(__dirname + "/"));
-app.use(function (req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin, X-Requested-With, Content-Type, Accept"
-	);
-	res.header(
-		"Access-Control-Allow-Methods",
-		"get, post, put, delete"
-	);
-	next();
-});
+// app.use(function (req, res, next) {
+// 	res.header("Access-Control-Allow-Origin", "*");
+// 	res.header(
+// 		"Access-Control-Allow-Headers",
+// 		"Origin, X-Requested-With, Content-Type, Accept"
+// 	);
+// 	res.header(
+// 		"Access-Control-Allow-Methods",
+// 		"get, post, put, delete"
+// 	);
+// 	next();
+// });
 app.post("/upload", Upload.upload.single("imgUploader"), (req, res, next) => {
 	Upload.post(req, res, next);
 });
