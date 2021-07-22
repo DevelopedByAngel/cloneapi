@@ -25,6 +25,10 @@ app.use(function (req, res, next) {
 		"Access-Control-Allow-Headers",
 		"Origin, X-Requested-With, Content-Type, Accept"
 	);
+	res.header(
+		"Access-Control-Allow-Methods",
+		"get, post, put, delete"
+	);
 	next();
 });
 app.post("/upload", Upload.upload.single("imgUploader"), (req, res, next) => {
