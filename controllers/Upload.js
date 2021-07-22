@@ -88,14 +88,17 @@ const postDP = (req, res, next) => {
 		error.httpStatusCode = 400;
 		return next(error);
 	}
-	const path = file.path;
+	var img={
+		contentType: req.file.mimetype,
+		data: binary(fs.readFileSync(file.path))
+	}
 	const additionalData = JSON.parse(req.body.data);
 	client.connect(url, function (err, db) {
 		// var id="5fc37fdf0fa17805bc4bb60a"
 		var database = db.db("Clone").collection("users");
 		database.updateOne(
 			{ _id: objectId(additionalData.id) },
-			{ $set: { path: path } },
+			{ $set: { img: img } },
 			(error1, r1) => {
 				console.log(r1);
 				console.log("updated", additionalData.userid);
@@ -112,6 +115,10 @@ const postProduct = (req, res, next) => {
 		return next(error);
 	}
 	console.log(file.path + "ok");
+	var img={
+		contentType: req.file.mimetype,
+		data: binary(fs.readFileSync(file.path))
+	}
 	const additionalData = JSON.parse(req.body.data);
 	Product.UploadProduct(
 		res,
@@ -121,7 +128,7 @@ const postProduct = (req, res, next) => {
 		additionalData.desc,
 		additionalData.price,
 		additionalData.qty,
-		file.path
+		img
 	);
 };
 module.exports = {

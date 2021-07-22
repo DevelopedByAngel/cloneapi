@@ -6,11 +6,11 @@ var objectId = mongo.ObjectId;
 var url =
 	"mongodb+srv://angel:angel@cluster0.xmcvr.mongodb.net/clone?retryWrites=true&w=majority";
 const User = require("./User.js");
-const UploadProduct = (res, id, userID, name, desc, price, qty, path) => {
-	console.log(desc, " ok ", path);
+const UploadProduct = (res, id, userID, name, desc, price, qty, img) => {
+	console.log(desc, " ok ", img);
 	var currdate = new Date();
 	const product = {
-		path: path,
+		img: img,
 		id: id,
 		user: userID,
 		name: name,
