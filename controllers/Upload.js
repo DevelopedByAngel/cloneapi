@@ -7,6 +7,7 @@ const Post = require("./Post.js");
 const Product = require("./Product.js");
 const User = require("./User.js");
 const fs = require("fs");
+var binary=mongo.Binary;
 var url =
 	"mongodb+srv://angel:angel@cluster0.xmcvr.mongodb.net/clone?retryWrites=true&w=majority";
 var storage = multer.diskStorage({
@@ -67,13 +68,17 @@ const post = (req, res, next) => {
 		error.httpStatusCode = 400;
 		return next(error);
 	}
-	console.log(file.path);
+	var img={
+		contentType: req.file.mimetype,
+		data: binary(fs.readFileSync(file.path))
+	}
+	console.log(img)
 	const additionalData = JSON.parse(req.body.data);
 	Post.UploadPost(
 		res,
 		additionalData.user,
 		additionalData.caption,
-		file.path
+		img
 	);
 };
 const postDP = (req, res, next) => {

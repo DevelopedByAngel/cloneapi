@@ -6,10 +6,10 @@ const bodyParser = require("body-parser");
 const fs = require("fs");
 var path = require('path');
 var mongo = require("mongodb");
-var mongoose = require('mongoose');
 var assert = require("assert");
 var client = mongo.MongoClient;
 var objectId = mongo.ObjectId;
+var binary=mongo.Binary;
 var url =
 	"mongodb+srv://angel:angel@cluster0.xmcvr.mongodb.net/clone?retryWrites=true&w=majority";
 const Post = require("./controllers/Post.js");
@@ -18,6 +18,7 @@ const User = require("./controllers/User.js");
 const Signup = require("./controllers/Signup.js");
 const Login = require("./controllers/Login.js");
 const Upload = require("./controllers/Upload.js");
+const Image=require("./controllers/Image.js");
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -65,6 +66,16 @@ client.connect(url, function (err, db) {
 
 	console.log("database");
 });
+app.get("/new",(req, res)=>
+{
+	// console.log(req)
+	Image.getImage(req,res);
+})
+app.post('/new',Upload.upload.single("imgUploader"),(req, res)=>
+{
+	console.log(req.file)
+	Image.postImage(req, res);
+})
 
 // const get = (name, res) => {
 // 	client.connect(url, function (err, db) {

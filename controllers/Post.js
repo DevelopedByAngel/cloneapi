@@ -6,14 +6,14 @@ var objectId = mongo.ObjectId;
 var url =
 	"mongodb+srv://angel:angel@cluster0.xmcvr.mongodb.net/clone?retryWrites=true&w=majority";
 const User = require("./User.js");
-const UploadPost = (res, userID, caption, path) => {
-	console.log(caption, " ok ", path);
+const UploadPost = (res, userID, caption, img) => {
+	console.log(caption, " ok ", img);
 	var captionFull = caption.split(" ");
 	var hashtags = captionFull.filter((c) => {
 		return c[0] == "#";
 	});
 	const post = {
-		path: path,
+		img: img,
 		user: userID,
 		caption: caption,
 		hashtags: hashtags,
