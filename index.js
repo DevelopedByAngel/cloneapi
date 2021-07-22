@@ -16,8 +16,9 @@ const User = require("./controllers/User.js");
 const Signup = require("./controllers/Signup.js");
 const Login = require("./controllers/Login.js");
 const Upload = require("./controllers/Upload.js");
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
+
 app.use(express.static(__dirname + "/"));
 // app.use(function (req, res, next) {
 // 	res.header("Access-Control-Allow-Origin", "*");
