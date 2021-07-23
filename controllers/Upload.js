@@ -44,17 +44,20 @@ var storageDP = multer.diskStorage({
 });
 var uploadDP = multer({ storage: storageDP });
 var storageProduct = multer.diskStorage({
+
 	destination: (req, file, callback) => {
-		if (fs.existsSync("./images/product/" + JSON.parse(req.body.data).id)) {
-			callback(null, "./images/product/" + JSON.parse(req.body.data).id);
+		const additionalData = JSON.parse(req.body.data);
+		console.log(additionalData)
+		if (fs.existsSync("./images/product/" + additionalData.id)) {
+			callback(null, "./images/product/" + additionalData.id);
 		} else {
-			fs.mkdir("./images/product/" + JSON.parse(req.body.data).id, (err) => {
+			fs.mkdir("./images/product/" + additionalData.id, (err) => {
 				if (err) {
 					console.log(err);
 					throw err;
 				}
 			});
-			callback(null, "./images/product/" + JSON.parse(req.body.data).id);
+			callback(null, "./images/product/" + additionalData.id);
 		}
 	},
 	filename: (req, file, callback) => {
