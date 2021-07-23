@@ -133,6 +133,7 @@ app.post("/product", (req, res) => {
 	Product.product(req, res);
 });
 app.post("/deleteProduct", (req, res) => {
+	console.log("deleteProduct")
 	Product.deleteProduct(req,res)
 })
 app.post("/editProduct", (req, res) => {

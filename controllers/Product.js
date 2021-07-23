@@ -65,8 +65,9 @@ const deleteProduct=(req, res) => {
 	const {id}=req.body;
 	client.connect(url, function (err, db) {
 		var product = db.db("Clone").collection("product");
-		product.deleteOne({_id: id},(err,r1)=>
+		product.deleteOne({_id: objectId(id)},(err,r1)=>
 			{
+				console.log(r1,id)
 				assert.equal(null,err);
 				res.json("deleted");
 			});
