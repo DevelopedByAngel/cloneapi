@@ -47,7 +47,7 @@ var storageProduct = multer.diskStorage({
 
 	destination: (req, file, callback) => {
 		// console.log("inside the uploading proess")
-		console.log(req)
+		// console.log(req.body)
 		const additionalData = JSON.parse(req.body.data);
 		// console.log(additionalData)
 		if (fs.existsSync("./images/product/" + additionalData.id)) {
@@ -114,7 +114,7 @@ const postDP = (req, res, next) => {
 	});
 };
 const postProduct = (req, res, next) => {
-	console.log(req.body.data);
+	console.log(req.file);
 	const file = req.file;
 	if (!file) {
 		const error = new Error("Please upload a file");
