@@ -59,14 +59,14 @@ app.post(
 app.post("/updatepost", (req, res) => {
 	Post.updatePost(req, res);
 });
-client.connect(url, function (err, db) {
-	console.log(err);
-	console.log(db);
-	var database = db.db("Clone").collection("login");
-	var id = "5fc37fdf0fa17805bc4bb60a";
+// client.connect(url, function (err, db) {
+// 	console.log(err);
+// 	console.log(db);
+// 	var database = db.db("Clone").collection("login");
+// 	var id = "5fc37fdf0fa17805bc4bb60a";
 
-	console.log("database");
-});
+// 	console.log("database");
+// });
 app.get("/new",(req, res)=>
 {
 	// console.log(req)
