@@ -114,6 +114,7 @@ const postDP = (req, res, next) => {
 	});
 };
 const postProduct = (req, res, next) => {
+	console.log(req.body.data);
 	const file = req.file;
 	if (!file) {
 		const error = new Error("Please upload a file");
