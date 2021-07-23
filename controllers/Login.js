@@ -13,6 +13,7 @@ const login = (req, res, client, url) => {
 		var database = db.db("Clone").collection("login");
 		var exists = database.findOne({ id: id }, (error, data) => {
 			assert.equal(null, error);
+			console.log(data)
 			const valid = password === jwt.verify(data.pwd, "spindle").password;
 			if (valid) {
 				console.log("logged in");

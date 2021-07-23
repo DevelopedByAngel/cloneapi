@@ -12,21 +12,22 @@ var url =
 	"mongodb+srv://angel:angel@cluster0.xmcvr.mongodb.net/clone?retryWrites=true&w=majority";
 var storage = multer.diskStorage({
 	destination: (req, file, callback) => {
-		if (fs.existsSync("./images/user/" + req.headers.id)) {
-			callback(null, "./images/user/" + req.headers.id);
+		console.log(req.header.id+"ddddddddddddddddd")
+		if (fs.existsSync("./images/post")) {
+			callback(null, "./images/post");
 		} else {
-			fs.mkdir("./images/user/" + req.headers.id, (err) => {
+			fs.mkdir("./images/post", (err) => {
 				if (err) {
 					throw err;
 				}
 			});
-			callback(null, "./images/user/" + req.headers.id);
+			callback(null, "./images/post");
 		}
 	},
 	filename: (req, file, callback) => {
 		callback(
 			null,
-			Date.now() + "_" + req.headers.postno + "_" + file.originalname
+			Date.now() + "_" +  "_" + file.originalname
 		);
 	},
 });
@@ -46,20 +47,16 @@ var uploadDP = multer({ storage: storageDP });
 var storageProduct = multer.diskStorage({
 
 	destination: (req, file, callback) => {
-		// console.log("inside the uploading proess")
-		// console.log(req.body)
-		const additionalData = JSON.parse(req.body.data);
-		console.log("........",additionalData)
-		if (fs.existsSync("./images/product/" + additionalData.id)) {
-			callback(null, "./images/product/" + additionalData.id);
+		if (fs.existsSync("./images/product/")) {
+			callback(null, "./images/product/" );
 		} else {
-			fs.mkdir("./images/product/" + additionalData.id, (err) => {
+			fs.mkdir("./images/product/", (err) => {
 				if (err) {
 					console.log(err);
 					throw err;
 				}
 			});
-			callback(null, "./images/product/" + additionalData.id);
+			callback(null, "./images/product/");
 		}
 	},
 	filename: (req, file, callback) => {
@@ -114,6 +111,7 @@ const postDP = (req, res, next) => {
 	});
 };
 const postProduct = (req, res, next) => {
+	console.log("*************************")
 	console.log(req.file);
 	const file = req.file;
 	if (!file) {
