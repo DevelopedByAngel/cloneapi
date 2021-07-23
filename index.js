@@ -67,16 +67,7 @@ app.post("/updatepost", (req, res) => {
 
 // 	console.log("database");
 // });
-app.get("/new",(req, res)=>
-{
-	// console.log(req)
-	Image.getImage(req,res);
-})
-app.post('/new',Upload.upload.single("imgUploader"),(req, res)=>
-{
-	console.log(req.file)
-	Image.postImage(req, res);
-})
+
 
 // const get = (name, res) => {
 // 	client.connect(url, function (err, db) {
@@ -141,7 +132,9 @@ app.get("/friends", (req, res) => {
 app.post("/product", (req, res) => {
 	Product.product(req, res);
 });
-
+app.post("/deleteProduct", (req, res) => {
+	Product.deleteProduct(req,res)
+})
 app.post("/editProduct", (req, res) => {
 	Product.editProduct(req, res);
 });

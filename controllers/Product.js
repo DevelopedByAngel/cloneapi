@@ -61,6 +61,17 @@ const review = (req, res) => {
 		);
 	});
 };
+const deleteProduct=(req, res) => {
+	const {id}=req.body;
+	client.connect(url, function (err, db) {
+		var product = db.db("Clone").collection("product");
+		product.deleteOne({_id: id},(err,r1)=>
+			{
+				assert.equal(null,err);
+				res.json("deleted");
+			});
+	})
+}
 const editProduct = (req, res) => {
 	const { id, user, name, desc, price, qty, qtyBought, isBuy } = req.body;
 	client.connect(url, function (err, db) {

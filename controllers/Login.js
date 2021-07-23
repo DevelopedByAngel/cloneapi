@@ -14,6 +14,12 @@ const login = (req, res, client, url) => {
 		var exists = database.findOne({ id: id }, (error, data) => {
 			assert.equal(null, error);
 			console.log(data)
+			if(!data)
+			{
+				res.json({ error: "Wrong credentials" });
+			}
+			else
+			{
 			const valid = password === jwt.verify(data.pwd, "spindle").password;
 			if (valid) {
 				console.log("logged in");
@@ -21,6 +27,7 @@ const login = (req, res, client, url) => {
 			} else {
 				res.json({ error: "Wrong credentials" });
 			}
+		}
 		});
 	});
 };
