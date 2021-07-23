@@ -51,6 +51,7 @@ app.post(
 	"/uploadProduct",
 	Upload.uploadProduct.single("imgUploader"),
 	(req, res, next) => {
+		console.log('ok')
 		Upload.postProduct(req, res, next);
 	}
 );
