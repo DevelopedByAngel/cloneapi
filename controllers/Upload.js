@@ -46,10 +46,10 @@ var uploadDP = multer({ storage: storageDP });
 var storageProduct = multer.diskStorage({
 
 	destination: (req, file, callback) => {
-		console.log("inside the uploading proess")
-		console.log(req.body)
+		// console.log("inside the uploading proess")
+		console.log(req)
 		const additionalData = JSON.parse(req.body.data);
-		console.log(additionalData)
+		// console.log(additionalData)
 		if (fs.existsSync("./images/product/" + additionalData.id)) {
 			callback(null, "./images/product/" + additionalData.id);
 		} else {
