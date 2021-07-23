@@ -50,6 +50,7 @@ var storageProduct = multer.diskStorage({
 		} else {
 			fs.mkdir("./images/product/" + req.headers.id, (err) => {
 				if (err) {
+					console.log(err);
 					throw err;
 				}
 			});
