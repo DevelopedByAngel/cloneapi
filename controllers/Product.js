@@ -211,6 +211,7 @@ const answerDoubt = (req, res) => {
 module.exports = {
 	UploadProduct: UploadProduct,
 	review: review,
+	deleteProduct: deleteProduct,
 	editProduct: editProduct,
 	getBuyers: getBuyers,
 	product: product,
