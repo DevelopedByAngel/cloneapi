@@ -19,7 +19,7 @@ const UploadProduct = (res, id, userID, name, desc, price, qty, img) => {
 		qty: qty,
 		likes: [],
 		comments: [],
-		date: [currdate.getDate(), currdate.getMonth(), currdate.getYear()],
+		date: [currdate.getDate(), currdate.getMonth()+1, currdate.getYear()],
 	};
 	client.connect(url, function (err, db) {
 		var user = db.db("Clone").collection("users");
