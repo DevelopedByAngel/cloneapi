@@ -171,6 +171,26 @@ app.post("/login", (req, res) => {
 app.post("/signup", (req, res) => {
 	Signup.signup(req, res, client, url);
 });
+app.post("/authsave",(req, res) => {
+	const {id,auth}=req.body;
+	console.log(req.body);
+	client.connect(url,(err,db)=>
+	{
+		var database=db.db("Clone").collection("users");
+		database.updateOne({_id:objectId(id)},{$set:{auth:auth}},(error,updated)=>
+		{
+			if(error)
+				res.json({success:false});
+			else
+			{ 
+				assert.equal(error,null);
+				// console.log(updated);
+				res.json({success:true});
+			}
+			db.close();
+		})
+	})
+})
 app.get("/search/:query", (req, res) => {
 	const { query } = req.params;
 	var users = [];
