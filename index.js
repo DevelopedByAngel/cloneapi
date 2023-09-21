@@ -228,4 +228,9 @@ app.get("/hashtags/:hashtag", (req, res) => {
 	});
 });
 
+app.get("/", (req, res) => {
+	console.log('Index');
+	res.json("Hello world");
+});
+
 app.listen(3000 || process.env.PORT);
