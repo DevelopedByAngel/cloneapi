@@ -16,6 +16,7 @@ const User = require("./controllers/User.js");
 const Signup = require("./controllers/Signup.js");
 const Login = require("./controllers/Login.js");
 const Upload = require("./controllers/Upload.js");
+console.log('imported');
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(__dirname + "/"));
