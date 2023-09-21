@@ -20,6 +20,7 @@ const Login = require("./controllers/Login.js");
 const Upload = require("./controllers/Upload.js");
 const Image=require("./controllers/Image.js");
 // app.use(cors());
+console.log('imported');
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + "/"));
@@ -271,4 +272,10 @@ app.get("/hashtags/:hashtag", (req, res) => {
 app.get("/test", (req, res) => {
 	res.json("okay");
 });
-app.listen(process.env.PORT || 5000);
+
+app.get("/", (req, res) => {
+	console.log('Index');
+	res.json("Hello world");
+});
+
+app.listen(3000 || process.env.PORT);
